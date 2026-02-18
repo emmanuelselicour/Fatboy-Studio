@@ -331,6 +331,12 @@
       border-radius: 40px;
       width: 100%;
       font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: var(--jaune-fonce);
     }
 
     /* OPTION SHOP / BLOG (mini preview) */
@@ -359,6 +365,18 @@
       text-align: center;
     }
     .footer a { color: var(--jaune); text-decoration: none; }
+
+    /* ALERTE PERSONNALISÉE (succès) */
+    .form-alert {
+      background: #4caf50;
+      color: white;
+      padding: 1rem;
+      border-radius: 40px;
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: 500;
+      display: none;
+    }
 
     /* responsive */
     @media (max-width: 700px) {
@@ -455,19 +473,18 @@
         <div class="gallery-item"><img src="https://i.postimg.cc/bD03CQHs/IMG-20260207-WA0054.jpg" alt="Maillot personnalisé dos"><div class="gallery-caption"><h4>Maillot vue arrière</h4><p>textile & numéros</p></div></div>
         <!-- 4. Calendrier personnalisé -->
         <div class="gallery-item"><img src="https://i.postimg.cc/59zk3wYf/IMG-20260207-WA0044.jpg" alt="Calendrier personnalisé"><div class="gallery-caption"><h4>Calendrier 2026</h4><p>édition limitée</p></div></div>
-        <!-- 5. Flyer / mini étiquette produit cheveux -->
+        <!-- 5. Flyer / mini étiquette produit cheveux (utilisé aussi comme favicon) -->
         <div class="gallery-item"><img src="https://i.postimg.cc/s2vRDvnj/IMG-20260218-WA0057.jpg" alt="Logo & flyer produit cheveux"><div class="gallery-caption"><h4>Étiquette capillaire</h4><p>design packaging</p></div></div>
         <!-- 6. Flyer entreprise (autre) -->
         <div class="gallery-item"><img src="https://i.postimg.cc/cLCRDS9c/IMG-20260207-WA0026.jpg" alt="Flyer entreprise"><div class="gallery-caption"><h4>Flyer société</h4><p>communication pro</p></div></div>
-        <!-- 7. Bidon personnalisé (manquait dans la liste mais texte disait "photo de bidon" - on utilise une autre visuel ? on a pas l'url, on va mettre un placeholder élégant pour ne pas briser la grille — mais si l'image existe, remplacez. Je laisse le texte, mais ajout d'une image de prévention.  Mais vous avez dit "Photo de bidon personnalisé qu'on a fait." je n'ai pas de lien direct, je vais utiliser la même image produit par défaut, mais en description claire. -->
+        <!-- 7. Bidon personnalisé (même si l'image exacte n'est pas fournie, on utilise une autre visuel cohérente) -->
         <div class="gallery-item"><img src="https://i.postimg.cc/52Shm8r2/IMG-20260207-WA0043.jpg" alt="Bidon personnalisé (exemple)"><div class="gallery-caption"><h4>Bidon sérigraphié</h4><p>objet personnalisé</p></div></div>
-        <!-- Note: la photo du bidon n'est pas fournie, j'utilise une autre en attendant, mais vous pourrez remplacer le src par le bon lien. -->
       </div>
       <p style="margin-top: 2rem; text-align: center;"><i class="fas fa-plus-circle" style="color: var(--bleu);"></i> Demandez votre création sur mesure</p>
     </div>
   </section>
 
-  <!-- CONTACT + FORMULAIRE / DEVIS + BOUTON WHATSAPP -->
+  <!-- CONTACT + FORMULAIRE / DEVIS + BOUTON WHATSAPP + FORMDSPREE -->
   <section id="contact" class="contact-section">
     <div class="container contact-flex">
       <div class="contact-info">
@@ -485,23 +502,35 @@
       </div>
       <div class="contact-form">
         <h3 style="color: var(--jaune); margin-bottom: 1.5rem;">Demande de devis</h3>
-        <form>
-          <div class="form-group"><input type="text" placeholder="Nom complet" required></div>
-          <div class="form-group"><input type="email" placeholder="Email" required></div>
-          <div class="form-group"><input type="tel" placeholder="Téléphone / WhatsApp"></div>
+        <!-- FORMULAIRE FORMDSPREE - utilise votre clé : xkovzqpl -->
+        <form id="devisForm" action="https://formspree.io/f/xkovzqpl" method="POST">
           <div class="form-group">
-            <select>
-              <option>Type de service souhaité</option>
-              <option>Flyer / print</option>
-              <option>Impression textile</option>
-              <option>Calendrier / agenda</option>
-              <option>Packaging / étiquette</option>
-              <option>Objet personnalisé</option>
-              <option>Autre</option>
+            <input type="text" name="nom" placeholder="Nom complet" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" name="telephone" placeholder="Téléphone / WhatsApp">
+          </div>
+          <div class="form-group">
+            <select name="service">
+              <option value="">Type de service souhaité</option>
+              <option value="Flyer / print">Flyer / print</option>
+              <option value="Impression textile">Impression textile</option>
+              <option value="Calendrier / agenda">Calendrier / agenda</option>
+              <option value="Packaging / étiquette">Packaging / étiquette</option>
+              <option value="Objet personnalisé">Objet personnalisé</option>
+              <option value="Autre">Autre</option>
             </select>
           </div>
-          <div class="form-group"><textarea rows="3" placeholder="Décrivez votre idée..."></textarea></div>
+          <div class="form-group">
+            <textarea name="message" rows="3" placeholder="Décrivez votre idée..."></textarea>
+          </div>
+          <!-- champ caché pour redirection ou personnalisation (optionnel) -->
+          <input type="hidden" name="_language" value="fr">
           <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Recevoir un devis gratuit</button>
+          <div id="formFeedback" class="form-alert"></div>
         </form>
       </div>
     </div>
@@ -522,16 +551,58 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <p>© 2025 FLEURISMA · Studio créatif by E.S Company — <strong style="color: white;">Best UI DESIGN</strong></p>
-      <p style="margin-top: 1rem;">Favicon & logo intégrés · Toutes les photos sont vos réalisations <i class="fas fa-heart" style="color: var(--jaune);"></i></p>
+      <p>© 2025 FLEURISMA · Studio créatif/ Site designe and Created by <strong style="color: white;">E.S Company</strong></p>
+      <p style="margin-top: 1rem;">Toutes les photos sont nos réalisations <i class="fas fa-heart" style="color: var(--jaune);"></i></p>
       <p><a href="#">Mentions légales</a> — <a href="#">Instagram</a> — <a href="#">LinkedIn</a></p>
     </div>
   </footer>
 
-  <!-- Petit script pour rendre le formulaire non fonctionnel (démo) mais on peut le laisser ainsi -->
+  <!-- Script pour gérer la soumission Formspree et afficher un message sans rechargement -->
   <script>
-    // juste pour éviter la soumission réelle en démonstration
-    document.querySelectorAll('form').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); alert('Merci ! Votre demande a été reçue (démonstration). Nous vous répondrons rapidement.'); }));
+    const form = document.getElementById('devisForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // on bloque le rechargement classique
+
+      const formData = new FormData(form);
+      // Convertir FormData en objet pour éventuellement logger, mais on envoie direct
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Succès
+          feedbackDiv.style.display = 'block';
+          feedbackDiv.textContent = '✅ Merci ! Votre demande a été envoyée. Je vous répondrai rapidement.';
+          feedbackDiv.style.background = '#4caf50';
+          form.reset(); // efface les champs
+          // faire disparaître le message après 5 secondes
+          setTimeout(() => {
+            feedbackDiv.style.display = 'none';
+          }, 5000);
+        } else {
+          // Erreur
+          const data = await response.json();
+          if (data.errors) {
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.textContent = '❌ Erreur : ' + data.errors.map(e => e.message).join(', ');
+            feedbackDiv.style.background = '#f44336';
+          } else {
+            throw new Error('Problème de soumission');
+          }
+        }
+      } catch (error) {
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.textContent = '❌ Problème réseau. Veuillez réessayer ou m\'écrire directement.';
+        feedbackDiv.style.background = '#f44336';
+      }
+    });
   </script>
 </body>
 </html>
