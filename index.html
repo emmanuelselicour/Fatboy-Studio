@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleurisma · studio créatif</title>
+  <!-- Favicon (généré à partir de l'image fournie) -->
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/s2vRDvnj/IMG-20260218-WA0057.jpg">
+  <style>
+    /* RESET & BASE — couleurs chaudes, pro, créatif */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #fcf8f3;  /* blanc chaud */
+      color: #1e1e1e;
+      line-height: 1.5;
+    }
+
+    /* palette : jaune (#f2c94c), noir (#111), bleu professionnel (#2d6a9f), blanc cassé */
+    :root {
+      --jaune: #f2c94c;
+      --jaune-fonce: #e0b73e;
+      --noir: #111111;
+      --bleu: #2d6a9f;
+      --bleu-fonce: #1e4b72;
+      --blanc-chaud: #fcf8f3;
+      --gris-clair: #f0ece6;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* TYPO & SPACING */
+    h1, h2, h3 {
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 3.2rem; }
+    h2 { font-size: 2.4rem; margin-bottom: 2rem; position: relative; }
+    h2:after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: var(--jaune);
+      margin-top: 0.5rem;
+    }
+    h3 { font-size: 1.5rem; margin: 1rem 0 0.5rem; }
+
+    /* HEADER (navbar) */
+    .navbar {
+      background: var(--noir);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--jaune);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: white; font-weight: 300; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover {
+      border-bottom-color: var(--jaune);
+      color: var(--jaune);
+    }
+
+    /* BOUTONS / ACTIONS */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn-jaune {
+      background: var(--jaune);
+      color: var(--noir);
+    }
+    .btn-jaune:hover {
+      background: var(--jaune-fonce);
+      transform: scale(1.02);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--jaune);
+      color: var(--noir);
+    }
+    .btn-outline:hover {
+      background: var(--jaune);
+    }
+    .btn-wa {
+      background: #25D366;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-wa:hover { background: #20b859; }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 4rem 0 3rem;
+      background: linear-gradient(145deg, var(--blanc-chaud) 0%, #fff5e6 100%);
+    }
+    .hero .container {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      flex: 1 1 350px;
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      color: #2d2d2d;
+      margin: 1.5rem 0;
+    }
+    .hero-photo {
+      flex: 0 0 280px;
+      text-align: center;
+    }
+    .hero-photo img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid var(--jaune);
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+    }
+    .hero-photo p {
+      margin-top: 0.5rem;
+      font-weight: 500;
+      color: var(--bleu-fonce);
+    }
+
+    /* SECTION BIO (profil, biographie) */
+    .bio-section {
+      padding: 4rem 0;
+      background: white;
+    }
+    .bio-grid {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .bio-text {
+      flex: 2 1 400px;
+    }
+    .bio-highlight {
+      flex: 1 1 250px;
+      background: var(--gris-clair);
+      padding: 2rem;
+      border-radius: 24px;
+      border-left: 6px solid var(--bleu);
+    }
+    .bio-highlight ul {
+      list-style: none;
+    }
+    .bio-highlight li {
+      margin: 1rem 0;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* SERVICES (cartes) */
+    .services-section {
+      padding: 4rem 0;
+      background: var(--blanc-chaud);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      border-bottom: 4px solid var(--jaune);
+    }
+    .service-card:hover { transform: translateY(-6px); }
+    .service-icon { font-size: 2.8rem; margin-bottom: 0.5rem; }
+
+    /* PORTFOLIO / GALERIE (avec toutes vos images) */
+    .portfolio-section {
+      padding: 4rem 0;
+      background: white;
+    }
+    .filter-tag {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-tag span {
+      background: var(--gris-clair);
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.8rem;
+    }
+    .gallery-item {
+      background: var(--blanc-chaud);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px -6px rgba(0,0,0,0.15);
+      transition: 0.2s;
+      border: 1px solid #f0e2d0;
+    }
+    .gallery-item:hover {
+      box-shadow: 0 18px 30px -8px rgba(0,0,0,0.2);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover img { transform: scale(1.02); }
+    .gallery-caption {
+      padding: 1rem 1rem 1.2rem;
+      background: white;
+    }
+    .gallery-caption h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+    .gallery-caption p {
+      color: var(--bleu);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* DEVIS / CONTACT / WIDGETS */
+    .contact-section {
+      padding: 4rem 0;
+      background: linear-gradient(145deg, #111111, #1a2a3a);
+      color: white;
+    }
+    .contact-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+    .contact-info {
+      flex: 1 1 280px;
+    }
+    .contact-info h2:after { background: var(--jaune); }
+    .contact-details p { margin: 1rem 0; display: flex; gap: 0.8rem; align-items: center; }
+    .whatsapp-float {
+      margin: 2rem 0;
+    }
+    .contact-form {
+      flex: 2 1 400px;
+      background: rgba(255,255,255,0.05);
+      padding: 2rem;
+      border-radius: 32px;
+      backdrop-filter: blur(6px);
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 40px;
+      background: rgba(255,255,240,0.9);
+      font-size: 1rem;
+    }
+    textarea { border-radius: 24px; resize: vertical; }
+    .btn-submit {
+      background: var(--jaune);
+      color: black;
+      font-weight: bold;
+      padding: 1rem 2rem;
+      border-radius: 40px;
+      width: 100%;
+      font-size: 1.1rem;
+    }
+
+    /* OPTION SHOP / BLOG (mini preview) */
+    .extras-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+    .extras-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .extra-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem;
+      text-align: center;
+      border: 2px dashed var(--bleu);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--noir);
+      color: #bbb;
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+    .footer a { color: var(--jaune); text-decoration: none; }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      h1 { font-size: 2.4rem; }
+      .navbar .container { flex-direction: column; gap: 1rem; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+  </style>
+  <!-- Font Awesome (optionnel pour icônes) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Favicon également déclaré en head, mais aussi petite icône de navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="#">FLEURISMA<span> studio</span></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#bio">Profil</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Réalisations</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#extras">Shop</a></li>
+      </ul>
+      <a href="https://wa.me/50943413331" class="btn btn-wa" target="_blank"><i class="fab fa-whatsapp"></i> +509 4341 3331</a>
+    </div>
+  </nav>
+
+  <!-- HERO + PHOTO PDG -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Créativité & impression <span style="color: var(--jaune);">personnalisée</span></h1>
+        <p>By Verly Fleurisma · Studio spécialisé en communication visuelle, flyers, calendriers, textiles et objets personnalisés pour entrepreneurs et marques locales.</p>
+        <a href="#portfolio" class="btn btn-jaune">Voir le portfolio</a>
+        <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Demander un devis</a>
+      </div>
+      <div class="hero-photo">
+        <!-- Photo du PDG -->
+        <img src="https://i.postimg.cc/bNkcs7HF/IMG-20260207-WA0058.jpg" alt="Verly Fleurisma - PDG fondateur">
+        <p><i class="fas fa-crown" style="color: var(--jaune);"></i> Verly Fleurisma · directeur créatif</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIO (biographie professionnelle + cibles) -->
+  <section id="bio" class="bio-section">
+    <div class="container bio-grid">
+      <div class="bio-text">
+        <h2>Qui suis-je ?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">Je m'appelle <strong>Verly Fleurisma</strong>, fondateur de <strong>E.S Company</strong>. Passionné par le design graphique et l'impression personnalisée, j'accompagne les jeunes entrepreneurs, PME et associations à concrétiser leurs projets visuels : flyers, calendriers, goodies, textiles, packaging…</p>
+        <p>Mon approche : allier esthétique chaleureuse et efficacité professionnelle. Chaque création reflète l'identité unique de mes clients, avec une touche moderne et accessible. Basé en Haïti, je travaille avec des marques locales et organisations communautaires.</p>
+      </div>
+      <div class="bio-highlight">
+        <h3 style="color: var(--bleu); margin-top: 0;">🎯 Clients idéaux</h3>
+        <ul>
+          <li><i class="fas fa-rocket" style="color: var(--jaune);"></i> Jeunes entrepreneurs</li>
+          <li><i class="fas fa-building" style="color: var(--jaune);"></i> PME / petites entreprises</li>
+          <li><i class="fas fa-graduation-cap" style="color: var(--jaune);"></i> Étudiants & associations</li>
+          <li><i class="fas fa-users" style="color: var(--jaune);"></i> Organisations communautaires</li>
+          <li><i class="fas fa-store" style="color: var(--jaune);"></i> Marques locales / particuliers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <h2>Mes services</h2>
+      <div class="services-grid">
+        <div class="service-card"><span class="service-icon">🎨</span><h3>Design graphique</h3><p>Flyers, logos, identité visuelle, supports print et web.</p></div>
+        <div class="service-card"><span class="service-icon">🖨️</span><h3>Impression personnalisée</h3><p>Textiles, calendriers, bidons, poches téléphone, objets pub.</p></div>
+        <div class="service-card"><span class="service-icon">📸</span><h3>Galerie & branding</h3><p>Valorisation produit, contenu pour réseaux et portfolio.</p></div>
+        <div class="service-card"><span class="service-icon">📦</span><h3>Conseil packaging</h3><p>Étiquettes pour produits (cheveux, cosmétiques, alimentaire).</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO / GALERIE (toutes les photos) -->
+  <section id="portfolio" class="portfolio-section">
+    <div class="container">
+      <h2>Réalisations récentes</h2>
+      <div class="filter-tag">
+        <span>Tous</span><span>Textile</span><span>Calendrier</span><span>Flyer</span><span>Packaging</span><span>Poche téléphone</span>
+      </div>
+      <div class="gallery">
+        <!-- 1. Poche téléphone personnalisée -->
+        <div class="gallery-item"><img src="https://i.postimg.cc/52Shm8r2/IMG-20260207-WA0043.jpg" alt="Poche téléphone personnalisée"><div class="gallery-caption"><h4>Poche téléphone</h4><p>impression textile • client particulier</p></div></div>
+        <!-- 2. Impression maillot (1) -->
+        <div class="gallery-item"><img src="https://i.postimg.cc/qhH1xmKY/IMG-20260207-WA0047.jpg" alt="Maillot personnalisé devant"><div class="gallery-caption"><h4>Maillot sport</h4><p>équipe / flocage</p></div></div>
+        <!-- 3. Impression maillot (2) -->
+        <div class="gallery-item"><img src="https://i.postimg.cc/bD03CQHs/IMG-20260207-WA0054.jpg" alt="Maillot personnalisé dos"><div class="gallery-caption"><h4>Maillot vue arrière</h4><p>textile & numéros</p></div></div>
+        <!-- 4. Calendrier personnalisé -->
+        <div class="gallery-item"><img src="https://i.postimg.cc/59zk3wYf/IMG-20260207-WA0044.jpg" alt="Calendrier personnalisé"><div class="gallery-caption"><h4>Calendrier 2026</h4><p>édition limitée</p></div></div>
+        <!-- 5. Flyer / mini étiquette produit cheveux -->
+        <div class="gallery-item"><img src="https://i.postimg.cc/s2vRDvnj/IMG-20260218-WA0057.jpg" alt="Logo & flyer produit cheveux"><div class="gallery-caption"><h4>Étiquette capillaire</h4><p>design packaging</p></div></div>
+        <!-- 6. Flyer entreprise (autre) -->
+        <div class="gallery-item"><img src="https://i.postimg.cc/cLCRDS9c/IMG-20260207-WA0026.jpg" alt="Flyer entreprise"><div class="gallery-caption"><h4>Flyer société</h4><p>communication pro</p></div></div>
+        <!-- 7. Bidon personnalisé (manquait dans la liste mais texte disait "photo de bidon" - on utilise une autre visuel ? on a pas l'url, on va mettre un placeholder élégant pour ne pas briser la grille — mais si l'image existe, remplacez. Je laisse le texte, mais ajout d'une image de prévention.  Mais vous avez dit "Photo de bidon personnalisé qu'on a fait." je n'ai pas de lien direct, je vais utiliser la même image produit par défaut, mais en description claire. -->
+        <div class="gallery-item"><img src="https://i.postimg.cc/52Shm8r2/IMG-20260207-WA0043.jpg" alt="Bidon personnalisé (exemple)"><div class="gallery-caption"><h4>Bidon sérigraphié</h4><p>objet personnalisé</p></div></div>
+        <!-- Note: la photo du bidon n'est pas fournie, j'utilise une autre en attendant, mais vous pourrez remplacer le src par le bon lien. -->
+      </div>
+      <p style="margin-top: 2rem; text-align: center;"><i class="fas fa-plus-circle" style="color: var(--bleu);"></i> Demandez votre création sur mesure</p>
+    </div>
+  </section>
+
+  <!-- CONTACT + FORMULAIRE / DEVIS + BOUTON WHATSAPP -->
+  <section id="contact" class="contact-section">
+    <div class="container contact-flex">
+      <div class="contact-info">
+        <h2>Discutons de votre projet</h2>
+        <p style="margin: 1.5rem 0;">Que ce soit pour un devis, une réservation ou une simple question, je suis à votre écoute.</p>
+        <div class="contact-details">
+          <p><i class="fas fa-envelope" style="color: var(--jaune); width: 30px;"></i> byverlyfleurisma@gmail.com</p>
+          <p><i class="fas fa-phone-alt" style="color: var(--jaune);"></i> +509 4341 3331</p>
+          <p><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp prioritaire</p>
+        </div>
+        <div class="whatsapp-float">
+          <a href="https://wa.me/50943413331" class="btn btn-wa" target="_blank" style="padding: 1rem 2.5rem;"><i class="fab fa-whatsapp"></i> Écrire sur WhatsApp</a>
+        </div>
+        <p><small>Réponse sous 24h · E.S Company, Best UI design</small></p>
+      </div>
+      <div class="contact-form">
+        <h3 style="color: var(--jaune); margin-bottom: 1.5rem;">Demande de devis</h3>
+        <form>
+          <div class="form-group"><input type="text" placeholder="Nom complet" required></div>
+          <div class="form-group"><input type="email" placeholder="Email" required></div>
+          <div class="form-group"><input type="tel" placeholder="Téléphone / WhatsApp"></div>
+          <div class="form-group">
+            <select>
+              <option>Type de service souhaité</option>
+              <option>Flyer / print</option>
+              <option>Impression textile</option>
+              <option>Calendrier / agenda</option>
+              <option>Packaging / étiquette</option>
+              <option>Objet personnalisé</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group"><textarea rows="3" placeholder="Décrivez votre idée..."></textarea></div>
+          <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Recevoir un devis gratuit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRAS (Boutique / Blog / Réservation) optionnel -->
+  <section id="extras" class="extras-section">
+    <div class="container">
+      <h2 style="color: var(--noir);">Et aussi ...</h2>
+      <div class="extras-grid">
+        <div class="extra-card"><i class="fas fa-store" style="font-size: 2.5rem; color: var(--bleu);"></i><h3>Mini-boutique</h3><p>Produits dérivés, calendriers, impressions prêtes à envoyer.</p><span style="background: var(--jaune); padding: 0.3rem 1rem; border-radius: 40px; display: inline-block; margin-top: 1rem;">Bientôt</span></div>
+        <div class="extra-card"><i class="fas fa-calendar-check" style="font-size: 2.5rem; color: var(--bleu);"></i><h3>Réservation studio</h3><p>Bloquez votre créneau pour une séance de création.</p><span style="background: var(--jaune); padding: 0.3rem 1rem; border-radius: 40px; display: inline-block; margin-top: 1rem;">Sur RDV</span></div>
+        <div class="extra-card"><i class="fas fa-newspaper" style="font-size: 2.5rem; color: var(--bleu);"></i><h3>Blog / actu</h3><p>Conseils design, nouveaux produits, événements.</p><span style="background: var(--jaune); padding: 0.3rem 1rem; border-radius: 40px; display: inline-block; margin-top: 1rem;">Lire</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 FLEURISMA · Studio créatif by E.S Company — <strong style="color: white;">Best UI DESIGN</strong></p>
+      <p style="margin-top: 1rem;">Favicon & logo intégrés · Toutes les photos sont vos réalisations <i class="fas fa-heart" style="color: var(--jaune);"></i></p>
+      <p><a href="#">Mentions légales</a> — <a href="#">Instagram</a> — <a href="#">LinkedIn</a></p>
+    </div>
+  </footer>
+
+  <!-- Petit script pour rendre le formulaire non fonctionnel (démo) mais on peut le laisser ainsi -->
+  <script>
+    // juste pour éviter la soumission réelle en démonstration
+    document.querySelectorAll('form').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); alert('Merci ! Votre demande a été reçue (démonstration). Nous vous répondrons rapidement.'); }));
+  </script>
+</body>
+</html>
